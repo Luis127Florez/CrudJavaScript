@@ -35,9 +35,9 @@ const cargarls = () => {
   } else {
     arrayActividades.forEach((element) => {
         if (element.estado) {
-            listaActividVista.innerHTML += `<div class="alert alert-primary" role="alert"><span class="material-symbols-outlined float-left mr-2">settings_accessibility</span><b>${element.actividad}</b>-${element.estado}<span style="float: right"><span class="material-symbols-outlined">clear</span><span class="material-symbols-outlined">delete_sweep</span></span></div>`;
+            listaActividVista.innerHTML += `<div class="alert alert-primary" role="alert"><span class="material-symbols-outlined float-left mr-2">settings_accessibility</span><b>${element.actividad}</b>-${element.estado}<span style="float: right"><span class="material-symbols-outlined">edit</span><span class="material-symbols-outlined">clear</span><span class="material-symbols-outlined">delete_sweep</span></span></div> <div id="ventanaModal" class="modal"><div class="contenido-modal"><span class="cerrar">&times;</span><h2>Ventana modal</h2><p>Esto es el texto de la ventana</p></div></div>`;
         } else {
-            listaActividVista.innerHTML += `<div class="alert alert-danger" role="alert"><span class="material-symbols-outlined float-left mr-2">settings_accessibility</span><b>${element.actividad}</b>-${element.estado}<span style="float: right"><span class="material-symbols-outlined">check_small</span><span class="material-symbols-outlined">delete_sweep</span></span></div>`;
+            listaActividVista.innerHTML += `<div class="alert alert-danger" role="alert"><span class="material-symbols-outlined float-left mr-2">settings_accessibility</span><b>${element.actividad}</b>-${element.estado}<span style="float: right"><span class="material-symbols-outlined">edit</span><span class="material-symbols-outlined">check_small</span><span class="material-symbols-outlined">delete_sweep</span></span></div><div id="ventanaModal" class="modal"><div class="contenido-modal"><span class="cerrar">&times;</span><h2>Ventana modal</h2><p>Esto es el texto de la ventana</p></div></div>`;
         }
     });
   }
@@ -85,7 +85,8 @@ listaActividVista.addEventListener("click", (e) => {
   if (
     e.target.innerHTML === "check_small" ||
     e.target.innerHTML === "delete_sweep" ||
-    e.target.innerHTML === "clear"
+    e.target.innerHTML === "clear"||
+    e.target.innerHTML === "edit"
   ) {
     if (e.target.innerHTML === "delete_sweep") {
       eliminarls(e.path[2].childNodes[1].innerHTML);
@@ -93,9 +94,10 @@ listaActividVista.addEventListener("click", (e) => {
     if (e.target.innerHTML === "clear" || e.target.innerHTML === 'check_small'){
       editarls(e.path[2].childNodes[1].innerHTML);
     }
-   /*  if (e.target.innerHTML === 'check_small') {
-        editarls(e.path[2].childNodes[1].innerHTML);            
-    } */
+    if (e.target.innerHTML === 'edit') {
+    let modal = document.getElementById("ventanaModal"); 
+    modal.style.display = "block";  
+    }
   }
 });
 
